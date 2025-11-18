@@ -212,7 +212,7 @@ def _compute_rating_from_z(series_z: pd.Series, tab: str) -> pd.Series:
 def get_top_10_winners(df, z_col="zscore", rating_col=None,
                        labname_col="labName_short", labid_col="labId", avg_col="avg"):
     # Ordina per |z| più piccolo (migliore performance)
-    df_sorted = df.sort_values(by=z_col, key=lambda x: x.abs()).head(10)
+    df_sorted = df.sort_values(by=z_col, key=lambda x: x.abs())
     cols = [labid_col, labname_col, avg_col, z_col]
     if rating_col and rating_col in df_sorted.columns:
         cols.append(rating_col)
@@ -753,7 +753,7 @@ for i in range(4):
         df[rating_col] = _compute_rating_from_z(df[z_col], tube)
 
         st.divider()
-        st.markdown("### Top 10 ")
+        st.markdown("### List of Laboratories Performance")
         #st.caption("Top 10 winners (with rating)")
         winners = get_top_10_winners(
             df,
